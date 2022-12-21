@@ -23,7 +23,7 @@ const config = {
     plugins: isProduction
         ? [
               new CopyPlugin({
-                  patterns: ['README.md', 'package.json', 'index.d.ts'],
+                  patterns: ['README.md', 'package.json', 'index.d.ts', 'popup.html', 'manifest.json', {from: 'js', to: 'js'}, {from: 'img', to: 'img'}],
               }),
           ]
         : [
