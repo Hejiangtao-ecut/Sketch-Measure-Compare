@@ -16,6 +16,7 @@ script.onload = () => {
       width: 0,
       enableDomRulers: false,
       enableTextReplace: false,
+      offsetX: 0,
       offsetY: 0
     });
 };

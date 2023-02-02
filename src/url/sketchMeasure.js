@@ -88,11 +88,25 @@ export default () => {
         header.appendChild(clearWrapper);
     };
 
+    /**
+     * 设置屏幕垂直偏移
+     */
     const setOffsetY = () => {
         const offsetY = window.top.sketchMeasureCompare.config.offsetY;
         setStyle(iframe, {
             top: `${offsetY}px`,
             height: `calc(100% - ${offsetY}px)`,
+        });
+    };
+
+    /**
+     * 设置屏幕水平偏移
+     */
+    const setOffsetX = () => {
+        const offsetX = window.top.sketchMeasureCompare.config.offsetX;
+        setStyle(iframe, {
+            left: `${offsetX}px`,
+            width: `calc(100% - ${offsetX}px)`
         });
     };
 
@@ -109,6 +123,7 @@ export default () => {
 
     const initIframe = () => {
         iframe = document.createElement('iframe');
+        setOffsetX();
         setOffsetY();
         setStyle(iframe, {
             border: 'none',
@@ -118,6 +133,7 @@ export default () => {
         iframe.height = '100%';
         iframe.src = window.top.location.href;
         iframe.onload = () => {
+            setOffsetX();
             setOffsetY();
             if (iframe.contentDocument) {
                 if (window.top.sketchMeasureCompare.config.enableBlockClose) {
@@ -313,6 +329,9 @@ export default () => {
             },
             set(target, property, value) {
                 target[property] = value;
+                if (property === 'offsetX') {
+                    setOffsetX();
+                }
                 if (property === 'offsetY') {
                     setOffsetY();
                 }

@@ -34,6 +34,7 @@ if (!window.top.sketchMeasureCompare) {
             zIndex: 10000,
             enableDomRulers: true,
             enableTextReplace: true,
+            offsetX: 0,
             offsetY: 100,
         });
     }
