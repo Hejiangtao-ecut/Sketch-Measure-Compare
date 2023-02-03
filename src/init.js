@@ -9,12 +9,14 @@ export default (config) => {
     const enableDomRulers = config?.enableDomRulers ?? false;
     const enableTextReplace = config?.enableTextReplace ?? false;
     const offsetY = config?.offsetY ?? 0;
+    const offsetX = config?.offsetX ?? 0;
     const width = config?.width ?? 0;
     const enableBlockClose = config?.enableBlockClose ?? true;
     const finalConfig = {
         zIndex,
         enableDomRulers,
         enableTextReplace,
+        offsetX,
         offsetY,
         width,
         enableBlockClose,

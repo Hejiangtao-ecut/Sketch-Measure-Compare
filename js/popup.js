@@ -24,6 +24,7 @@ const sendMsg2Content = ({ msg, payload }) => {
 const DEFAULT_CONFIG = {
     zIndex: 10000,
     width: 0,
+    offsetX: 0,
     offsetY: 0,
     enableDomRulers: false,
     enableTextReplace: false,
@@ -32,12 +33,14 @@ const DEFAULT_CONFIG = {
 const setConfig = (config) => {
     config.zIndex = +config.zIndex || DEFAULT_CONFIG.zIndex;
     config.width = +config.width || DEFAULT_CONFIG.width;
+    config.offsetX = +config.offsetX || DEFAULT_CONFIG.offsetX;
     config.offsetY = +config.offsetY || DEFAULT_CONFIG.offsetY;
     config.enableDomRulers = !!config.enableDomRulers;
     config.enableTextReplace = !!config.enableTextReplace;
 
     zIndex.value = config.zIndex;
     width.value = config.width;
+    offsetX.value = config.offsetX;
     offsetY.value = config.offsetY;
     enableDomRulers.checked = config.enableDomRulers;
     enableTextReplace.checked = config.enableTextReplace;
@@ -99,6 +102,7 @@ apply.onclick = () => {
         zIndex: +zIndex.value || DEFAULT_CONFIG.zIndex,
         width: +width.value || DEFAULT_CONFIG.width,
         offsetY: +offsetY.value || DEFAULT_CONFIG.offsetY,
+        offsetX: +offsetX.value || DEFAULT_CONFIG.offsetX,
         enableDomRulers: !!enableDomRulers.checked,
         enableTextReplace: !!enableTextReplace.checked,
     };

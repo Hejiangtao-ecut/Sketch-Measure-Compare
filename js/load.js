@@ -63,6 +63,7 @@
                             && screen.x + screen.width + 10 < window.innerWidth
                     ) {
                         const offsetY = window.top.sketchMeasureCompare.config.offsetY;
+                        const offsetX = window.top.sketchMeasureCompare.config.offsetX;
                         const screenOffset = offsetY > 0 ? offsetY : 0;
                         let minY = screen.y + screenOffset;
                         if (minY < 0) {
@@ -74,7 +75,8 @@
                         }
                         const height = maxY - minY;
 
-                        let minX = screen.x;
+                        const screenOffsetX = offsetX > 0 ? offsetX : 0;
+                        let minX = screen.x + screenOffsetX;
                         if (minX < 0) {
                             minX = 0;
                         }
