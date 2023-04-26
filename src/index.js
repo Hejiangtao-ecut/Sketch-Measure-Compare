@@ -6,12 +6,14 @@ import html from './url/index.html';
 import tplIndex from './url/tpl';
 import tpl from './url/tpl.html';
 import textReplace from './url/textReplace';
-import inspectorCenterTpl from './url/inspectorCenterTpl.html'
+import inspectorCenterTpl from './url/inspectorCenterTpl.html';
+import sendLog from './log';
 import init from './init';
 
 class SketchMeasureCompare {
     constructor() {
         this.init = init;
+        this.sendLog = sendLog;
     }
 }
 SketchMeasureCompare.prototype.rulers = rulers;
@@ -27,9 +29,9 @@ SketchMeasureCompare.prototype.inspectorCenterTpl = inspectorCenterTpl;
 if (!window.top.sketchMeasureCompare) {
     const sketchMeasureCompare = new SketchMeasureCompare();
     window.top.sketchMeasureCompare = sketchMeasureCompare;
+    sketchMeasureCompare.sendLog();
 
     if (process.env.NODE_ENV === 'development') {
-        console.log(sketchMeasureCompare);
         sketchMeasureCompare.init({
             zIndex: 10000,
             enableDomRulers: true,

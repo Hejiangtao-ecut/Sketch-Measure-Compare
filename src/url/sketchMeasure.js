@@ -23,8 +23,8 @@ export default () => {
         wrapper = document.getElementsByClassName('screen-viewer-inner')?.[0];
         screen = document.getElementById('screen');
         rulers = document.getElementById('rulers');
-        flowMode = document.getElementById('flow-mode');
-        header = document.getElementsByClassName('header-center')?.[0];
+        flowMode = document.getElementById('flow-mode') || {};
+        header = document.getElementsByClassName('header-center')?.[0] || {};
         return wrapper && screen && rulers && flowMode && header;
     };
 
@@ -61,6 +61,9 @@ export default () => {
     };
 
     const initClear = () => {
+        if (!header) {
+            return;
+        }
         const clearWrapper = document.createElement('div');
         const clear = document.createElement('div');
         clear.innerHTML = 'CLEAR UI';
