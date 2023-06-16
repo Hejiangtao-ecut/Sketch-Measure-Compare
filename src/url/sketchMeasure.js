@@ -113,6 +113,61 @@ export default () => {
         });
     };
 
+    /**
+     * 设置屏幕字体
+     */
+    const setFontMultiplier = () => {
+        try {
+            const html = iframe.contentDocument.querySelector('html');
+            let multiplier = window.top.sketchMeasureCompare.config.fontMultiplier;
+            const oldMultiplier = window.top.sketchMeasureCompare.config.oldMultiplier || 1;
+            window.top.sketchMeasureCompare.config.oldMultiplier = multiplier;
+
+            if (!html) {
+                return;
+            }
+
+            const body = html.querySelector('body');
+            switch (multiplier) {
+                case 0.86:
+                    body.classList.add('font-size-0');
+                    break;
+                case 1.06:
+                    body.classList.add('font-size-2');
+                    break;
+                case 1.21:
+                    body.classList.add('font-size-3');
+                    break;
+            }
+
+            if (oldMultiplier && oldMultiplier !== multiplier) {
+                multiplier = multiplier / oldMultiplier;
+            }
+
+            function changeFontMultiplier(element, multiplier) {
+                if (!element || !element.style) {
+                    return;
+                }
+                const fontsize = getComputedStyle(element).getPropertyValue("font-size").replace('px', '');
+                const lineHeight = getComputedStyle(element).getPropertyValue("line-height").replace('px', '');
+
+                const childNode = Array.from(element.childNodes) || [];
+                childNode.forEach(item => {
+                    changeFontMultiplier(item, multiplier)
+                })
+
+                if (fontsize) {
+                    element.style.fontSize = (+fontsize * multiplier) + 'px';
+                    element.style.lineHeight = (+lineHeight * multiplier) + 'px';
+                }
+            }
+
+            changeFontMultiplier(html, multiplier);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const closeBlock = () => {
         enableBlockClose =
             window.top.sketchMeasureCompare.config.enableBlockClose;
@@ -332,11 +387,18 @@ export default () => {
             },
             set(target, property, value) {
                 target[property] = value;
+
+                console.log('watchConfigChange=======');
+                console.log(property);
+
                 if (property === 'offsetX') {
                     setOffsetX();
                 }
                 if (property === 'offsetY') {
                     setOffsetY();
+                }
+                if (property === 'fontMultiplier') {
+                    setFontMultiplier();
                 }
                 if (property === 'enableBlockClose') {
                     if (iframe.contentDocument) {

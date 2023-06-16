@@ -23,6 +23,10 @@ interface Config {
      * 窗口大小
      */
     width?: number;
+    /**
+     * 字体放大倍数
+     */
+    fontMultiplier?: number;
     enableBlockClose?: boolean;
 }
 

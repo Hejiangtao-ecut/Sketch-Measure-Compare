@@ -26,6 +26,7 @@ const DEFAULT_CONFIG = {
     width: 0,
     offsetX: 0,
     offsetY: 0,
+    fontMultiplier: 1,
     enableDomRulers: false,
     enableTextReplace: false,
 };
@@ -35,6 +36,7 @@ const setConfig = (config) => {
     config.width = +config.width || DEFAULT_CONFIG.width;
     config.offsetX = +config.offsetX || DEFAULT_CONFIG.offsetX;
     config.offsetY = +config.offsetY || DEFAULT_CONFIG.offsetY;
+    config.fontMultiplier = +config.fontMultiplier || DEFAULT_CONFIG.fontMultiplier;
     config.enableDomRulers = !!config.enableDomRulers;
     config.enableTextReplace = !!config.enableTextReplace;
 
@@ -44,6 +46,8 @@ const setConfig = (config) => {
     offsetY.value = config.offsetY;
     enableDomRulers.checked = config.enableDomRulers;
     enableTextReplace.checked = config.enableTextReplace;
+    fontMultiplier.selectedIndex = [1, 0.86, 1.06, 1.21].indexOf(config.fontMultiplier);
+    fontMultiplier.value = config.fontMultiplier;
     chrome.storage.local.set({ sketchMeasureCompareConfig: config });
 };
 
@@ -53,6 +57,9 @@ const getConfig = (config) => {
     }
     return new Promise((resolve) => {
         chrome.storage.local.get(['sketchMeasureCompareConfig'], (res) => {
+            if (res && (res.sketchMeasureCompareConfig)) {
+                res.sketchMeasureCompareConfig.fontMultiplier = 1;
+            }
             resolve(res.sketchMeasureCompareConfig || DEFAULT_CONFIG);
         });
     });
@@ -103,6 +110,7 @@ apply.onclick = () => {
         width: +width.value || DEFAULT_CONFIG.width,
         offsetY: +offsetY.value || DEFAULT_CONFIG.offsetY,
         offsetX: +offsetX.value || DEFAULT_CONFIG.offsetX,
+        fontMultiplier: +fontMultiplier.value || DEFAULT_CONFIG.fontMultiplier,
         enableDomRulers: !!enableDomRulers.checked,
         enableTextReplace: !!enableTextReplace.checked,
     };

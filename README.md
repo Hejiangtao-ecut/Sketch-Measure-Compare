@@ -17,7 +17,8 @@ script.onload = () => {
       enableDomRulers: false,
       enableTextReplace: false,
       offsetX: 0,
-      offsetY: 0
+      offsetY: 0，
+      fontMultiplier: 0
     });
 };
 script.src = "https://unpkg.com/sketch-measure-compare@latest/index.min.js";

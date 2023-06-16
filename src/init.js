@@ -11,6 +11,7 @@ export default (config) => {
     const offsetY = config?.offsetY ?? 0;
     const offsetX = config?.offsetX ?? 0;
     const width = config?.width ?? 0;
+    const fontMultiplier = config?.fontMultiplier ?? 1;
     const enableBlockClose = config?.enableBlockClose ?? true;
     const finalConfig = {
         zIndex,
@@ -18,6 +19,7 @@ export default (config) => {
         enableTextReplace,
         offsetX,
         offsetY,
+        fontMultiplier,
         width,
         enableBlockClose,
     };

@@ -38,6 +38,7 @@ if (!window.top.sketchMeasureCompare) {
             enableTextReplace: true,
             offsetX: 0,
             offsetY: 100,
+            fontMultiplier: 1
         });
     }
 }
